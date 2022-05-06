@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <EditText
+        android:id="@+id/Card_num_id"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:hint="Card number"
+        android:layout_height="40dp"></EditText>
+
+    <EditText
+        android:id="@+id/Card_csv_id"
+        android:hint="csv"
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"></EditText>
+
+
+    <ImageView
+        android:id="@+id/Card_remove_id"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/image_delete"></ImageView>
+</LinearLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_name.xml" value="0.3305" />
+        <entry key="app/src/main/res/drawable-anydpi/image_add.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable-anydpi/image_cancel.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable-anydpi/image_car.xml" value="0.3305" />
+        <entry key="app/src/main/res/drawable-anydpi/image_card.xml" value="0.3305" />
+        <entry key="app/src/main/res/drawable-anydpi/image_delete.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable-anydpi/image_exit.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable-anydpi/image_family_doctor.xml" value="0.3305" />
+        <entry key="app/src/main/res/drawable-anydpi/image_friends.xml" value="0.3305" />
+        <entry key="app/src/main/res/drawable-anydpi/image_save.xml" value="0.2815" />
+        <entry key="app/src/main/res/drawable-anydpi/image_settings.xml" value="0.3305" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3505" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3505" />
+        <entry key="app/src/main/res/layout/activity_car.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_car_add.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_card.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_card_add.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_family_doctor.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_family_doctor_add.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_family_doctor_update.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_friends.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_friends_add.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_main_window.xml" value="0.12834736036725325" />
+        <entry key="app/src/main/res/layout/activity_setting.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/authorization.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/main_window.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/registration.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/row_add_car.xml" value="0.262109375" />
+        <entry key="app/src/main/res/layout/row_add_card.xml" value="0.262109375" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

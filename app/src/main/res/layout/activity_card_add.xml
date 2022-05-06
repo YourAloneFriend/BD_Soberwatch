@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".registration_and_authorization.AuthorizationActivity">
+
+    <ImageView
+        android:id="@+id/LogoImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="70sp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@mipmap/icon_foreground"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <LinearLayout
+        android:id="@+id/card_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:orientation="vertical"></LinearLayout>
+
+    <Button
+        android:id="@+id/card_add_button_id"
+        android:layout_width="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_height="40dp"
+        android:text="Add card"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:textAllCaps="false"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:backgroundTint="@color/buttoncolor"
+        ></Button>
+
+    <Button
+        android:id="@+id/save_button_id"
+        android:layout_width="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_height="40dp"
+        android:text="Save"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:textAllCaps="false"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:backgroundTint="@color/buttoncolor"
+        ></Button>
+</LinearLayout>

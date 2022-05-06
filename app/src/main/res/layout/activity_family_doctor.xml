@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:context=".registration_and_authorization.AuthorizationActivity">
+
+    <ImageButton
+        android:id="@+id/back_button_id"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        app:srcCompat="@drawable/image_exit" />
+
+    <ImageView
+        android:id="@+id/LogoImage"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="70sp"
+        android:adjustViewBounds="true"
+        app:srcCompat="@mipmap/icon_foreground"/>
+
+
+    <TextView
+        android:id="@+id/doc_firstname_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_below="@+id/LogoImage"
+        android:text="@string/usr_firstname"
+        android:textSize="20dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/doc_lastname_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="14sp"
+        android:layout_below="@+id/doc_firstname_id"
+        android:text="@string/usr_lastname"
+        android:textSize="20dp">
+
+    </TextView>
+    <TextView
+        android:id="@+id/doc_phonenum_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="14sp"
+        android:layout_below="@+id/doc_lastname_id"
+        android:text="@string/usr_phonenum"
+        android:textSize="20dp">
+
+    </TextView>
+
+
+    <Button
+        android:id="@+id/update_button_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/LogoImage"
+        android:layout_marginHorizontal="100sp"
+        android:layout_marginTop="350sp"
+        android:background="@null"
+        android:text="Update data"
+        android:backgroundTint="@color/buttoncolor"
+        ></Button>
+</RelativeLayout>

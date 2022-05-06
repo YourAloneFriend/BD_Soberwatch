@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".registration_and_authorization.AuthorizationActivity">
+
+    <ImageView
+        android:id="@+id/LogoImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="70sp"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true"
+        app:srcCompat="@mipmap/icon_foreground"/>
+
+    <TextView
+        android:id="@+id/alco_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="0sp"
+        android:layout_below="@+id/LogoImage"
+        android:textSize="18sp"
+        android:ems="10"
+        android:textColor="@color/buttoncolor"
+        android:inputType="textPersonName"
+        android:text="Alchohol lvl: " />
+
+    <TextView
+        android:id="@+id/alco_info_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="0sp"
+        android:layout_below="@+id/LogoImage"
+        android:textSize="18sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/puls_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/alco_id"
+        android:textSize="18sp"
+        android:ems="10"
+        android:textColor="@color/buttoncolor"
+        android:inputType="textPersonName"
+        android:text="Pulse: " />
+
+    <TextView
+        android:id="@+id/puls_info_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/alco_id"
+        android:textSize="18sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/permission_text_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/puls_id"
+        android:textSize="20sp"
+        android:ems="10"
+        android:textColor="@color/buttoncolor"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:text="PERMISSIONS" />
+
+    <TextView
+        android:id="@+id/card_permission_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/permission_text_id"
+        android:textSize="18sp"
+        android:ems="10"
+        android:textColor="@color/buttoncolor"
+        android:inputType="textPersonName"
+        android:text="Card usage: " />
+
+    <TextView
+        android:id="@+id/card_permission_access_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/permission_text_id"
+        android:textSize="18sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/car_permission_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/card_permission_id"
+        android:textSize="18sp"
+        android:ems="10"
+        android:textColor="@color/buttoncolor"
+        android:inputType="textPersonName"
+        android:text="Car usage: " />
+
+    <TextView
+        android:id="@+id/car_permission_access_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_marginHorizontal="@dimen/textwidth"
+        android:layout_marginTop="10sp"
+        android:layout_below="@+id/card_permission_id"
+        android:textSize="18sp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="" />
+
+    <ImageButton
+        android:id="@+id/exit_button_id"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentRight="true"
+        android:background="@null"
+        app:srcCompat="@drawable/image_exit" />
+
+    <ImageButton
+        android:id="@+id/card_button_id"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="340sp"
+        android:layout_marginHorizontal="106sp"
+        android:background="@null"
+        app:srcCompat="@drawable/image_card"
+        android:layout_below="@+id/LogoImage"
+        />
+
+    <ImageButton
+        android:id="@+id/car_button_id"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/LogoImage"
+        android:layout_alignLeft="@+id/card_button_id"
+        android:layout_marginTop="340sp"
+        android:layout_marginLeft="70sp"
+        android:background="@null"
+        app:srcCompat="@drawable/image_car" />
+
+    <ImageButton
+        android:id="@+id/medical_button_id"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/LogoImage"
+        android:layout_alignLeft="@+id/car_button_id"
+        android:layout_marginTop="340sp"
+        android:layout_marginLeft="70sp"
+        android:background="@null"
+        app:srcCompat="@drawable/image_family_doctor" />
+
+</RelativeLayout>

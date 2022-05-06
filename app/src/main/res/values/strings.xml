@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SoberWatch</string>
+    <string name="permition_allowed">ALLOWED</string>
+    <string name="permition_forbidden">FORBIDDEN</string>
+
+
+
+    <string name="usr_firstname">Firstname:</string>
+    <string name="usr_lastname">Lastname:</string>
+    <string name="usr_phonenum">Phonenum:</string>
+
+
+</resources>

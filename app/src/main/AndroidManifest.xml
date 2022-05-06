@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.soberwatch">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SoberWatch">
+        <activity
+            android:name=".Main.FamilyDoctor.FamilyDoctorAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Main.Card.CardAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Main.Car.CarAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Main.FamilyDoctor.FamilyDoctorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Main.Card.CardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Main.Car.CarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Main.MainWindowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".registration_and_authorization.RegistrationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".registration_and_authorization.AuthorizationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
