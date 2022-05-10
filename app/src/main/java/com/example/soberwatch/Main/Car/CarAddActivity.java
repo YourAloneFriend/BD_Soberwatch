@@ -5,23 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.soberwatch.DB_stuff.Car;
 import com.example.soberwatch.DB_stuff.Consts;
 import com.example.soberwatch.DB_stuff.DB;
 import com.example.soberwatch.R;
 
-import java.sql.Array;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CarAddActivity extends AppCompatActivity {
@@ -32,7 +28,7 @@ public class CarAddActivity extends AppCompatActivity {
     private DB db = null;
 
     private String id;
-    private ResultSet car_data;
+    private List<Car> car_data;
 
     private ArrayList<String> cars_id;
     private ArrayList<String> delete_cars_id;
@@ -48,7 +44,6 @@ public class CarAddActivity extends AppCompatActivity {
 
     }
 
-
     private void removeView(View view)
     {
         layoutList.removeView(view);
@@ -59,7 +54,6 @@ public class CarAddActivity extends AppCompatActivity {
         EditText NameText = (EditText)carView.findViewById(R.id.Car_name_id);
         EditText NumberText = (EditText)carView.findViewById(R.id.Car_number_id);
         ImageView removeCar = (ImageView)carView.findViewById(R.id.Car_remove_id);
-        layoutList.addView(carView);
 
         removeCar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,22 +61,23 @@ public class CarAddActivity extends AppCompatActivity {
                 removeView(view);
             }
         });
+
+        layoutList.addView(carView);
     }
 
     private void getCars()
     {
-
-        car_data =  db.GetCarData(id);
+        cars_id = new ArrayList<>();
+        car_data = db.GetCarData(id);
         try {
-            while (car_data.next()) {
+            for(Car x : car_data) {
                 View carView = getLayoutInflater().inflate(R.layout.row_add_car, null, false);
                 EditText NameText = (EditText)carView.findViewById(R.id.Car_name_id);
                 EditText NumberText = (EditText)carView.findViewById(R.id.Car_number_id);
                 NumberText.setEnabled(false);
                 ImageView removeCar = (ImageView)carView.findViewById(R.id.Car_remove_id);
-                NameText.setText(car_data.getString("Whole_name"));
-                NameText.setText(car_data.getString("Number"));
-                layoutList.addView(carView);
+                NameText.setText(x.getWhole_name());
+                NumberText.setText(x.getNumber());
 
                 removeCar.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -91,9 +86,10 @@ public class CarAddActivity extends AppCompatActivity {
                     }
 
                 });
-                cars_id.add(car_data.getString("id"));
+
+                layoutList.addView(carView);
+                cars_id.add(db.GetCarId(x));
             }
-            car_data.first();
         } catch (Exception e){}
 
     }
@@ -108,7 +104,7 @@ public class CarAddActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
 
-        db = new DB();
+        db = new DB(CarAddActivity.this);
 
         getCars();
         addView();
@@ -125,9 +121,8 @@ public class CarAddActivity extends AppCompatActivity {
 
     private void save_data()
     {
-        ArrayList<ArrayList<String>> Name_Number = new ArrayList<ArrayList<String>>();
-        Name_Number.add(new ArrayList<String>());
-        Name_Number.add(new ArrayList<String>());
+        List<Car> GetCarFromActivity = new ArrayList<>();
+        delete_cars_id = new ArrayList<>();
 
 
         try {
@@ -138,22 +133,22 @@ public class CarAddActivity extends AppCompatActivity {
                 EditText NameText = (EditText) view.findViewById(R.id.Car_name_id);
                 EditText NumberText = (EditText) view.findViewById(R.id.Car_number_id);
 
-                Name_Number.get(0).add(NameText.getText().toString());
-                Name_Number.get(1).add(NumberText.getText().toString());
+                GetCarFromActivity.add(new Car(id, NameText.getText().toString(), NumberText.getText().toString()));
 
-                if(!check_name_valid(Name_Number.get(0).get(i).toString())) {
+
+                if(!check_name_valid(GetCarFromActivity.get(i).getWhole_name())) {
                     NameText.setError("Empty or not valid!");
                     valid = true;
                 }
-                if(!check_number_valid(Name_Number.get(1).get(i).toString())){
+                if(!check_number_valid(GetCarFromActivity.get(i).getNumber())){
                     NumberText.setError("Empty or not valid!");
                     valid = true;
                 }
 
                 if(i < cars_id.size()) {
-                    if(!Name_Number.get(1).get(i).equals(car_data.getString("Number")))
-                        delete_cars_id.add(db.GetCarId(id, Name_Number.get(1).get(i).toString()));
-                    car_data.next();
+                    if(!GetCarFromActivity.get(i).getNumber().equals(car_data.get(i).getNumber()))
+                        delete_cars_id.add(db.GetCarId(GetCarFromActivity.get(i)));
+
                 }
             }
             if(valid)
@@ -166,17 +161,13 @@ public class CarAddActivity extends AppCompatActivity {
 
             car_data = db.GetCarData(id);
             for (int i = 0; i < cars_id.size(); ++i) {
-                View view = layoutList.getChildAt(i);
 
-                if (!Name_Number.get(0).get(i).equals(car_data.getString("Whole_name")))
-                    db.UpdateCarData(cars_id.get(i), Name_Number.get(0).get(i).toString());
-                car_data.next();
+                if (!GetCarFromActivity.get(i).getNumber().equals(car_data.get(i).getWhole_name()))
+                    db.UpdateCarData(GetCarFromActivity.get(i));
             }
             for (int i = cars_id.size(); i < layoutList.getChildCount(); ++i) {
-                View view = layoutList.getChildAt(i);
-                EditText NameText = (EditText) view.findViewById(R.id.Car_name_id);
-                EditText NumberText = (EditText) view.findViewById(R.id.Car_number_id);
-                db.AddCarData(id, NameText.getText().toString(), NumberText.getText().toString());
+                Car tempCar = new Car(String.valueOf(id), GetCarFromActivity.get(i).getWhole_name(),GetCarFromActivity.get(i).getNumber());
+                db.AddCarData(tempCar);
             }
 
         } catch (Exception e){}

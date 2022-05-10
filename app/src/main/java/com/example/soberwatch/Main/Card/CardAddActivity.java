@@ -11,12 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.example.soberwatch.DB_stuff.Card;
 import com.example.soberwatch.DB_stuff.Consts;
 import com.example.soberwatch.DB_stuff.DB;
 import com.example.soberwatch.R;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class CardAddActivity extends AppCompatActivity {
@@ -27,7 +28,7 @@ public class CardAddActivity extends AppCompatActivity {
     private DB db = null;
 
     private String id;
-    private ResultSet card_data;
+    private List<Card> card_data;
 
     private ArrayList<String> cards_id;
     private ArrayList<String> delete_cards_id;
@@ -65,17 +66,17 @@ public class CardAddActivity extends AppCompatActivity {
 
     private void getCards()
     {
-
+        cards_id = new ArrayList<>();
         card_data =  db.GetCardData(id);
         try {
-            while (card_data.next()) {
+            for(Card x : card_data) {
                 View carView = getLayoutInflater().inflate(R.layout.row_add_card, null, false);
-                EditText NameText = (EditText)carView.findViewById(R.id.Card_num_id);
-                EditText NumberText = (EditText)carView.findViewById(R.id.Card_csv_id);
-                NumberText.setEnabled(false);
+                EditText NumberText = (EditText)carView.findViewById(R.id.Card_num_id);
+                EditText CsvText = (EditText)carView.findViewById(R.id.Card_csv_id);
+                CsvText.setEnabled(false);
                 ImageView removeCard = (ImageView)carView.findViewById(R.id.Card_remove_id);
-                NameText.setText(card_data.getString("card_num"));
-                NameText.setText(card_data.getString("csv"));
+                NumberText.setText(x.getCard_num());
+                CsvText.setText(x.getCsv());
                 layoutList.addView(carView);
 
                 removeCard.setOnClickListener(new View.OnClickListener() {
@@ -85,9 +86,8 @@ public class CardAddActivity extends AppCompatActivity {
                     }
 
                 });
-                cards_id.add(card_data.getString("id"));
+                cards_id.add(db.GetCardId(x));
             }
-            card_data.first();
         } catch (Exception e){}
 
     }
@@ -102,7 +102,7 @@ public class CardAddActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
 
-        db = new DB();
+        db = new DB(CardAddActivity.this);
 
         getCards();
         addView();
@@ -118,35 +118,32 @@ public class CardAddActivity extends AppCompatActivity {
 
     private void save_data()
     {
-        ArrayList<ArrayList<String>> Num_csv = new ArrayList<ArrayList<String>>();
-        Num_csv.add(new ArrayList<String>());
-        Num_csv.add(new ArrayList<String>());
-
+        List<Card> GetCardFromActivity = new ArrayList<>();
+        delete_cards_id = new ArrayList<>();
 
         try {
             boolean valid = false;
             for (int i = 0; i < layoutList.getChildCount(); ++i)
             {
                 View view = layoutList.getChildAt(i);
-                EditText NumText = (EditText) view.findViewById(R.id.Card_num_id);
-                EditText csvText = (EditText) view.findViewById(R.id.Card_csv_id);
+                EditText NumberText = (EditText) view.findViewById(R.id.Card_num_id);
+                EditText CsvText = (EditText) view.findViewById(R.id.Card_csv_id);
 
-                Num_csv.get(0).add(NumText.getText().toString());
-                Num_csv.get(1).add(csvText.getText().toString());
+                GetCardFromActivity.add(new Card(id,  NumberText.getText().toString(), CsvText.getText().toString()));
 
-                if(!check_number_valid(Num_csv.get(0).get(i).toString())) {
-                    NumText.setError("Empty or not valid!");
+
+                if(!check_number_valid(GetCardFromActivity.get(i).getCard_num())) {
+                    NumberText.setError("Empty or not valid!");
                     valid = true;
                 }
-                if(!check_csv_valid(Num_csv.get(1).get(i).toString())){
-                    csvText.setError("Empty or not valid!");
+                if(!check_csv_valid(GetCardFromActivity.get(i).getCsv())){
+                    CsvText.setError("Empty or not valid!");
                     valid = true;
                 }
 
                 if(i < cards_id.size()) {
-                    if(!Num_csv.get(0).get(i).equals(card_data.getString("card_num")))
-                        delete_cards_id.add(db.GetCarId(id, Num_csv.get(1).get(i).toString()));
-                    card_data.next();
+                    if(!GetCardFromActivity.get(i).getCsv().equals(card_data.get(i).getCsv()))
+                        delete_cards_id.add(db.GetCardId(GetCardFromActivity.get(i)));
                 }
             }
             if(valid)
@@ -159,16 +156,12 @@ public class CardAddActivity extends AppCompatActivity {
 
             card_data = db.GetCardData(id);
             for (int i = 0; i < cards_id.size(); ++i) {
-                View view = layoutList.getChildAt(i);
-
-                if (!Num_csv.get(0).get(i).equals(card_data.getString("card_num")))
-                    db.UpdateCarData(cards_id.get(i), Num_csv.get(0).get(i).toString());
-                card_data.next();
+                if (!GetCardFromActivity.get(i).getCard_num().equals(card_data.get(i).getCard_num()))
+                    db.UpdateCardData(GetCardFromActivity.get(i));
             }
 
             for (int i = cards_id.size(); i < layoutList.getChildCount(); ++i) {
-                View view = layoutList.getChildAt(i);
-                db.AddCarData(id, Num_csv.get(0).get(i).toString(), Num_csv.get(1).get(i).toString());
+                db.AddCardData(GetCardFromActivity.get(i));
             }
 
         } catch (Exception e){}

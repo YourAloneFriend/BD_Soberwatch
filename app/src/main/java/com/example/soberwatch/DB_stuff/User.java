@@ -1,9 +1,10 @@
 package com.example.soberwatch.DB_stuff;
 
+import java.util.regex.Pattern;
+
 public class User {
     private static String Firstname;
     private static String id, email, password;
-    private static String pulse = "50", alcohol_lvl = "0";
 
     public User(String Firstname, String email, String password)
     {
@@ -35,15 +36,9 @@ public class User {
         return password;
     }
 
-    public static String getPulse() {
-        return pulse;
-    }
-
-    public static String getAlcohol_lvl() {
-        return alcohol_lvl;
-    }
 
     public static void setId(String id) {
         User.id = id;
     }
+
 }

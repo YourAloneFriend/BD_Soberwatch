@@ -10,11 +10,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.soberwatch.DB_stuff.DB;
-import com.example.soberwatch.Main.Car.CarActivity;
-import com.example.soberwatch.Main.Car.CarAddActivity;
+import com.example.soberwatch.DB_stuff.FamilyDoctor;
 import com.example.soberwatch.R;
-
-import java.sql.ResultSet;
 
 public class FamilyDoctorActivity extends AppCompatActivity {
 
@@ -48,18 +45,17 @@ public class FamilyDoctorActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
 
-        db = new DB();
+        db = new DB(FamilyDoctorActivity.this);
     }
 
     private void print_docs()
     {
-        ResultSet doc_data =  db.GetDocData(id);
+        FamilyDoctor doc_data =  db.GetDocData(id);
         try {
-            while(doc_data.next()) {
-                firstname.setText("Firstname");
-                lastname.setText("Lastname");
-                phonenum.setText("phonenum");
-            }
+            firstname.setText(doc_data.getFirstname());
+            lastname.setText(doc_data.getLastname());
+            phonenum.setText(doc_data.getPhonenum());
+
         } catch (Exception e){}
     }
 

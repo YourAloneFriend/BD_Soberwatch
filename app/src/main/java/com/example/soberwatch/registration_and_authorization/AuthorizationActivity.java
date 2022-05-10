@@ -15,9 +15,6 @@ import com.example.soberwatch.Functions_Class;
 import com.example.soberwatch.Main.MainWindowActivity;
 import com.example.soberwatch.R;
 
-import java.sql.ResultSet;
-import java.util.Set;
-
 public class AuthorizationActivity extends AppCompatActivity {
 
     private EditText Email;
@@ -25,7 +22,7 @@ public class AuthorizationActivity extends AppCompatActivity {
     private Button sign_in;
     private Button sign_up;
     private TextView error_text;
-    private String[] user_data = new String[2];
+    private String[] user_data;
     private DB db = null;
 
     @Override
@@ -45,7 +42,7 @@ public class AuthorizationActivity extends AppCompatActivity {
         sign_up = findViewById(R.id.sign_up_id);
         error_text = findViewById(R.id.error_id);
 
-        db = new DB();
+        db = new DB(AuthorizationActivity.this);
     }
 
     private void setupListeners()
@@ -57,13 +54,15 @@ public class AuthorizationActivity extends AppCompatActivity {
                     if (CheckDataEntered()) {
                         SetInputData();
                         if (CheckDataEntered()) {
-                            User user = new User(Email.getText().toString(), Password.getText().toString());
-                            ResultSet authorizated = db.logInUser(user);
-                            if (authorizated == null)
+                            User user = new User(user_data[0], user_data[1]);
+                            String authorized = db.logInUser(user);
+                            if (authorized == null)
                                 error_text.setText("Wrong email or password!!!");
-                            Intent intent = new Intent(AuthorizationActivity.this, MainWindowActivity.class);
-                            intent.putExtra("id", String.valueOf(authorizated.getInt(1)));
-                            startActivity(intent);
+                            else {
+                                Intent intent = new Intent(AuthorizationActivity.this, MainWindowActivity.class);
+                                intent.putExtra("id", authorized);
+                                startActivity(intent);
+                            }
                         }
                     }
                 } catch (Exception e){}
@@ -81,6 +80,7 @@ public class AuthorizationActivity extends AppCompatActivity {
 
     protected void SetInputData()
     {
+        user_data = new String[2];
         user_data[0] = Email.getText().toString();
         user_data[1] = Password.getText().toString();
     }

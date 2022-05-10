@@ -9,10 +9,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.soberwatch.DB_stuff.Car;
 import com.example.soberwatch.DB_stuff.DB;
 import com.example.soberwatch.R;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public class CarActivity extends AppCompatActivity {
 
@@ -42,17 +43,17 @@ public class CarActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
 
-        db = new DB();
+        db = new DB(CarActivity.this);
     }
 
     private void print_cars()
     {
         int num = 1;
         String text = "";
-        ResultSet car_data =  db.GetCarData(id);
+        List<Car> car_data =  db.GetCarData(id);
         try {
-            while (car_data.next()) {
-                text +=  String.valueOf(num) + ": " + car_data.getString("Whole_name") + " - " + car_data.getString("Number") + "\n\n";
+            for(Car x : car_data) {
+                text +=  num + ": " + x.getWhole_name() + " - " + x.getNumber() + "\n\n";
             }
         } catch (Exception e){}
 

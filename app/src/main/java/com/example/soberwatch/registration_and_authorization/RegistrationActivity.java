@@ -23,7 +23,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private EditText Password_2;
     private Button sign_up;
     private Button back;
-    private String[] user_data = new String[3];
+    private String[] user_data;
     private TextView error_text;
     private DB db = null;
 
@@ -43,7 +43,9 @@ public class RegistrationActivity extends AppCompatActivity {
         back = findViewById(R.id.back_id);
         error_text = findViewById(R.id.error_id);
 
-        db = new DB();
+        db = new DB(RegistrationActivity.this);
+
+        //fAuth = Fire
 
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +53,9 @@ public class RegistrationActivity extends AppCompatActivity {
                 SetInputData();
                 if(CheckDataEntered()) {
                     User user = new User(user_data[0], user_data[1], user_data[2]);
-                    db.signUpUser(user);
-                    error_text.setText("Successfully registered!");
+                    if(db.signUpUser(user))
+                        error_text.setText("Success!");
+
                 }
                 else
                     error_text.setText("Wrong data!");
@@ -72,6 +75,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     protected void SetInputData()
     {
+        user_data = new String[3];
         user_data[0] = Name.getText().toString();
         user_data[1] = Email.getText().toString();
         user_data[2] = Password_1.getText().toString();

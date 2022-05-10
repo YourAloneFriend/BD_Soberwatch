@@ -9,12 +9,11 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.soberwatch.DB_stuff.Card;
 import com.example.soberwatch.DB_stuff.DB;
-import com.example.soberwatch.Main.Car.CarActivity;
-import com.example.soberwatch.Main.Car.CarAddActivity;
 import com.example.soberwatch.R;
 
-import java.sql.ResultSet;
+import java.util.List;
 
 public class CardActivity extends AppCompatActivity {
 
@@ -45,17 +44,17 @@ public class CardActivity extends AppCompatActivity {
         Intent intent = getIntent();
         id = intent.getStringExtra("id");
 
-        db = new DB();
+        db = new DB(CardActivity.this);
     }
 
     private void print_cards()
     {
         int num = 1;
         String text = "";
-        ResultSet card_data =  db.GetCardData(id);
+        List<Card> card_data =  db.GetCardData(id);
         try {
-            while (card_data.next()) {
-                text +=  String.valueOf(num) + ": " + card_data.getString("card_num") + " - " + card_data.getString("csv") + "\n\n";
+            for(Card x : card_data) {
+                text +=  num + ": " + x.getCard_num() + " - " + x.getCsv() + "\n\n";
             }
         } catch (Exception e){}
 

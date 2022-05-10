@@ -8,7 +8,7 @@ public class Functions_Class
 {
     public static boolean isEmpty(EditText text)
     {
-        CharSequence str = text.getText().toString();
+        CharSequence str = text.getText().toString().trim();
         return TextUtils.isEmpty(str);
     }
 
