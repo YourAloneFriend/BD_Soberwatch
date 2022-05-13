@@ -50,7 +50,7 @@ public class FamilyDoctorActivity extends AppCompatActivity {
 
     private void print_docs()
     {
-        FamilyDoctor doc_data =  db.GetDocData(id);
+        FamilyDoctor doc_data =  db.GetDocData(db.GetDocId(id));
         try {
             firstname.setText(doc_data.getFirstname());
             lastname.setText(doc_data.getLastname());

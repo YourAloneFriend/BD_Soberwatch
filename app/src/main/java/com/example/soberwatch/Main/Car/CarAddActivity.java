@@ -111,7 +111,7 @@ public class CarAddActivity extends AppCompatActivity {
     }
 
     private static boolean check_number_valid(String number) {
-        return Pattern.matches("[A-Z]{2}\\s\\d{2}\\s[A-Z]{2}", number);
+        return Pattern.matches("[A-Z]{2} \\d{4} [A-Z]{2}", number);
     }
 
     private static boolean check_name_valid(@NonNull String name)
@@ -119,7 +119,7 @@ public class CarAddActivity extends AppCompatActivity {
         return name.trim().length() >= 3;
     }
 
-    private void save_data()
+    private boolean save_data()
     {
         List<Car> GetCarFromActivity = new ArrayList<>();
         delete_cars_id = new ArrayList<>();
@@ -152,7 +152,7 @@ public class CarAddActivity extends AppCompatActivity {
                 }
             }
             if(valid)
-                return;
+                return false;
 
 
             for (String x : delete_cars_id) {
@@ -171,6 +171,8 @@ public class CarAddActivity extends AppCompatActivity {
             }
 
         } catch (Exception e){}
+
+        return true;
     }
 
     private void setupListeners()
@@ -185,8 +187,8 @@ public class CarAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                save_data();
-                finish();
+                if(save_data())
+                    finish();
             }
         });
     }

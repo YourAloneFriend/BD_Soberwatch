@@ -54,7 +54,6 @@ public class CardAddActivity extends AppCompatActivity {
         EditText NameText = (EditText)cardView.findViewById(R.id.Card_num_id);
         EditText NumberText = (EditText)cardView.findViewById(R.id.Card_csv_id);
         ImageView removeCard = (ImageView)cardView.findViewById(R.id.Car_remove_id);
-        layoutList.addView(cardView);
 
         removeCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +61,8 @@ public class CardAddActivity extends AppCompatActivity {
                 removeView(view);
             }
         });
+
+        layoutList.addView(cardView);
     }
 
     private void getCards()
@@ -70,14 +71,13 @@ public class CardAddActivity extends AppCompatActivity {
         card_data =  db.GetCardData(id);
         try {
             for(Card x : card_data) {
-                View carView = getLayoutInflater().inflate(R.layout.row_add_card, null, false);
-                EditText NumberText = (EditText)carView.findViewById(R.id.Card_num_id);
-                EditText CsvText = (EditText)carView.findViewById(R.id.Card_csv_id);
+                View cardView = getLayoutInflater().inflate(R.layout.row_add_card, null, false);
+                EditText NumberText = (EditText)cardView.findViewById(R.id.Card_num_id);
+                EditText CsvText = (EditText)cardView.findViewById(R.id.Card_csv_id);
                 CsvText.setEnabled(false);
-                ImageView removeCard = (ImageView)carView.findViewById(R.id.Card_remove_id);
+                ImageView removeCard = (ImageView)cardView.findViewById(R.id.Card_remove_id);
                 NumberText.setText(x.getCard_num());
                 CsvText.setText(x.getCsv());
-                layoutList.addView(carView);
 
                 removeCard.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -86,6 +86,8 @@ public class CardAddActivity extends AppCompatActivity {
                     }
 
                 });
+
+                layoutList.addView(cardView);
                 cards_id.add(db.GetCardId(x));
             }
         } catch (Exception e){}
@@ -116,7 +118,7 @@ public class CardAddActivity extends AppCompatActivity {
         return Pattern.matches("\\d{3}", csv);
     }
 
-    private void save_data()
+    private boolean save_data()
     {
         List<Card> GetCardFromActivity = new ArrayList<>();
         delete_cards_id = new ArrayList<>();
@@ -147,7 +149,7 @@ public class CardAddActivity extends AppCompatActivity {
                 }
             }
             if(valid)
-                return;
+                return false;
 
 
             for (String x : delete_cards_id) {
@@ -165,6 +167,7 @@ public class CardAddActivity extends AppCompatActivity {
             }
 
         } catch (Exception e){}
+        return true;
     }
 
     private void setupListeners()
@@ -179,8 +182,8 @@ public class CardAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
-                save_data();
-                finish();
+                if(save_data())
+                    finish();
             }
         });
     }
